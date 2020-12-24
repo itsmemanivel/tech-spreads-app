@@ -1,0 +1,34 @@
+{
+  "name": "backend-nodejs",
+  "version": "1.0.1",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DOOFIE-app/Backend-nodejs.git"
+  },
+  "author": "veluvj",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DOOFIE-app/Backend-nodejs/issues"
+  },
+  "homepage": "https://github.com/DOOFIE-app/Backend-nodejs#readme",
+  "devDependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "method-override": "^3.0.0",
+    "mongoose": "^5.11.8",
+    "nodemon": "^2.0.6",
+    "router": "^1.3.5"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "express-async-errors": "^3.1.1",
+    "path": "^0.12.7",
+    "swagger-ui-express": "^4.1.6"
+  }
+}
