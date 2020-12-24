@@ -5,11 +5,13 @@ var rootPath = path.normalize(__dirname + '/../');
 var { UserController } = require('./controllers');
 
 
-
 module.exports = function(app){
 
-    router.get('/getall', UserController.index);
-    router.get('/get/:id', UserController.show);
+    router.post('/users', UserController.add )
+    router.get('/users', UserController.index);
+    router.get('/user/:id', UserController.show);
+    router.put('/user/:id', UserController.update);
+    router.delete('/user/:id', UserController.remove);
 
-    app.use('/api/users', router);
+    app.use('/api_v1', router);
 }

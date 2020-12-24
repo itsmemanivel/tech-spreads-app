@@ -6,15 +6,16 @@ var mongoose = require('mongoose');
 var cors = require('cors');
 var methodOverride = require('method-override');
 var cookieParser = require('cookie-parser'); 
-var dbURI = 'mongodb+srv://veluvijay:blogger1804@cluster0.9t5kr.mongodb.net/doofie?retryWrites=true';
+var db = require('./config/db');
+var dbURI = db.URI;
+const swaggerUi = require("swagger-ui-express");
+swaggerDocument = require("./swagger.json");
 
-mongoose.connect(dbURI,{useUnifiedTopology: true, useNewUrlParser: true}, function(err, res){
-    if(err){
-        console.log(err);
-    } else {
-        console.log(":::::::::::: Connected to MongoDB ::::::::::::");
-    }
-});
+mongoose.connect(dbURI,{useUnifiedTopology: true, useNewUrlParser: true, useFindAndModify: false})
+.then(() => console.log(":::::::::::: Connected to MongoDB ::::::::::::"))
+.catch(err =>{
+    console.log(":::::::::::: ERROR ::::::::::::\n", err);
+})
 
 
 app.use(bodyParser.urlencoded({extended: true}));
@@ -23,14 +24,10 @@ app.use(cors());
 app.use(methodOverride());
 app.use(cookieParser());
 
-
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 require('./routes')(app);
 
-// app.get('/',(req, res)=>{
-//     res.json({"message":"Hello World!"});
-// })
 
-
-app.listen(port,'0.0.0.0',(req, res, next)=>{
+app.listen(port,'0.0.0.0',()=>{
     console.log('server running at ' + port);
 })

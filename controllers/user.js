@@ -1,15 +1,77 @@
-const { User } = require('../models/index').User;
+const { User } = require('../models');
+var mongodb = require("mongodb");
+var ObjectID = require('mongodb').ObjectID;
 
 const userController = {
-    async index(req, res){
-        const users = await User.find({});
-        res.send(users);
+
+    /*
+     :::: ADD USERS ::::
+    */
+    add(req, res, next){ 
+        const users = new User(req.body);
+        users.save(function(err, data){
+            if (err) {
+                res.json({msg : 'Failed!'});
+            } else {
+                res.json({msg : 'Created Successfully!', data : data});
+            }
+        })
     },
 
+    /*
+     :::: GET ALL USERS ::::
+    */
+    async index(req, res){
+        const users = await User.find((err, data)=>{
+            if(err) {
+                res.json({msg : 'Failed!'});
+            } else {
+                res.send(data);
+            }
+        });
+    },
+
+    /*
+     :::: GET USERS BY ID::::
+    */
     async show(req, res){
-        const users = await User.findById(req.params.id);
-        res.send(users);
-    }
+        var ID = req.params.id;
+        const users = await User.findById({_id: new mongodb.ObjectID(ID.toString())}, (err, data)=>{
+            if(err) {
+                res.json({msg : 'Failed!'});
+            } else {
+                res.send(data);
+            } 
+        });
+    },
+
+    /*
+     :::: UPDATE USERS ::::
+    */
+    async update(req, res, next){
+        var ID = req.params.id;
+        const users = await User.findByIdAndUpdate({_id: new mongodb.ObjectID(ID.toString())}, req.body, {new: true}, (err, data)=>{
+            if(err) {
+                res.json({msg : 'Failed!'});
+            } else {
+                res.json({msg : 'Updated Successfully!', data : data});
+            }  
+        });
+    },
+
+    /*
+     :::: DELETE USERS ::::
+    */
+    async remove(req, res){
+        var ID = req.params.id;
+        const users = await User.deleteOne({_id: new mongodb.ObjectID(ID.toString())}, (err) =>{
+            if(err) {
+                res.json({msg : 'Failed!'});
+            } else {
+                res.json({msg : 'Deleted Successfully!'});
+            }  
+        });
+    },
 }
 
 
