@@ -55,7 +55,7 @@
             }
           }
         },
-        "/users/{userId}": {
+        "/user/{userId}": {
           "parameters": [
             {
               "name": "userId",
