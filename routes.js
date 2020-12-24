@@ -15,13 +15,13 @@ module.exports = function(app){
     router.delete('/user/:id', UserController.remove);
     
     app.use('/api_v1', router);
-//     app.use('/', (req, res) =>{
-//         res.json({
-//             app : 'DOOFIE',
-//             backend : 'NodeJS',
-//             frontend : 'Flutter',
-//             database : 'mongoDB',
-//             github : 'https://github.com/DOOFIE-app'
-//         })
-//     })
+    app.use('/', (req, res) =>{
+        res.json({
+            app : 'DOOFIE',
+            backend : 'NodeJS',
+            frontend : 'Flutter',
+            database : 'mongoDB',
+            github : 'https://github.com/DOOFIE-app'
+        })
+    })
 }
