@@ -16,9 +16,7 @@
     "url": "https://github.com/DOOFIE-app/Backend-nodejs/issues"
   },
   "homepage": "https://github.com/DOOFIE-app/Backend-nodejs#readme",
-  "devDependencies": {
-    
-  },
+  "devDependencies": {},
   "dependencies": {
     "body-parser": "^1.19.0",
     "express": "^4.17.1",

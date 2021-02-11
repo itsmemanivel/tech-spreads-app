@@ -2,14 +2,14 @@
     "swagger": "2.0",
     "info": {
         "version": "1.0.0",
-        "title": "DOOFIE APP",
+        "title": "Tech Spreads",
         "description": "REST API ",
         "license": {
             "name": "MIT",
             "url": "https://opensource.org/licenses/MIT"
         }
     },
-    "host": "doofie.herokuapp.com",
+    "host": "tech-spreads.herokuapp.com",
     "basePath": "/api_v1",
     "paths": {
         "/users": {
@@ -50,6 +50,48 @@
                 "description": "OK",
                 "schema": {
                   "$ref": "#/definitions/Users"
+                }
+              }
+            }
+          }
+        },"/stocks": {
+          "post": {
+            "tags": [
+              "Stocks"
+            ],
+            "description": "Create new stock in system",
+            "parameters": [
+              {
+                "name": "stock",
+                "in": "body",
+                "description": "Stock that we want to create",
+                "schema": {
+                  "$ref": "#/definitions/Stock"
+                }
+              }
+            ],
+            "produces": [
+              "application/json"
+            ],
+            "responses": {
+              "200": {
+                "description": "New Stock is created",
+                "schema": {
+                  "$ref": "#/definitions/Stock"
+                }
+              }
+            }
+          },
+          "get": {
+            "tags": [
+              "Stocks"
+            ],
+            "summary": "Get all stocks in system",
+            "responses": {
+              "200": {
+                "description": "OK",
+                "schema": {
+                  "$ref": "#/definitions/Stocks"
                 }
               }
             }
@@ -147,6 +189,78 @@
         "Users": {
           "type": "array",
           "$ref": "#/definitions/User"
+        },
+
+        "Stock": {
+          "required": [
+            "symbl",
+            "delayedBid",
+            "delayedAsk",
+            "delayedLast",
+            "delayedOpen",
+            "delayedClose",
+            "delayedHigh",
+            "delayedLow",
+            "delayedVolume",
+            "mid",
+            "percentageChange",
+            "shortableShares"
+          ],
+          "properties": {
+            "_id": {
+              "type": "string",
+              "uniqueItems": true
+            },
+            "symbol": {
+              "type": "string"
+            },
+            "exch": {
+              "type": "string"
+            },
+            "curr": {
+              "type": "string"
+            },
+            "prim": {
+              "type": "string"
+            },
+            "delayedBid": {
+              "type": "string"
+            },
+            "delayedAsk": {
+              "type": "string"
+            },
+            "delayedLast": {
+              "type": "string"
+            },
+            "delayedOpen": {
+              "type": "string"
+            },
+            "delayedClose": {
+              "type": "string"
+            },
+            "delayedHigh": {
+              "type": "string"
+            },
+            "delayedLow": {
+              "type": "string"
+            },
+            "delayedVolume": {
+              "type": "string"
+            },
+            "mid": {
+              "type": "string"
+            },
+            "percentageChange": {
+              "type": "string"
+            },
+            "shortableShares": {
+              "type": "string"
+            }
+          }
+        },
+        "Stocks": {
+          "type": "array",
+          "$ref": "#/definitions/Stock"
         }
     }
 }
